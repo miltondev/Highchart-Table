@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+    <style>
+    div {
+  width: 50%;
+  float: left;
+}
+
+    </style>
+</head>
+<body>
+    
+
+<div id="pie-platforms"></div>
+<div id="pie-browsers"></div>
+
+<table class="table" width="100%" id="users">
+  <thead>
+    <tr>
+      <td>User</td>
+      <td>Platform</td>
+      <td>Browser</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="mac safari">
+      <td>Adam</td>
+      <td>Mac</td>
+      <td>Safari</td>
+    </tr>
+    <tr class="windows ie">
+      <td>Betty</td>
+      <td>Windows</td>
+      <td>IE</td>
+    </tr>
+    <tr class="windows ie">
+      <td>Charlie</td>
+      <td>Windows</td>
+      <td>IE</td>
+    </tr>
+    <tr class="mac chrome">
+      <td>Dean</td>
+      <td>Mac</td>
+      <td>Chrome</td>
+    </tr>
+    <tr class="linux opera">
+      <td>Eve</td>
+      <td>Linux</td>
+      <td>Opera</td>
+    </tr>
+    <tr class="mac safari">
+      <td>Frank</td>
+      <td>Mac</td>
+      <td>Safari</td>
+    </tr>
+    <tr class="windows ie">
+      <td>Garry</td>
+      <td>Windows</td>
+      <td>IE</td>
+    </tr>
+    <tr class="mac firefox">
+      <td>Helen</td>
+      <td>Mac</td>
+      <td>Firefox</td>
+    </tr>
+    <tr class="windows ie">
+      <td>Ivan</td>
+      <td>Windows</td>
+      <td>IE</td>
+    </tr>
+    <tr class="windows firefox">
+      <td>Joseph</td>
+      <td>Windows</td>
+      <td>Firefox</td>
+    </tr>
+    <tr class="windows ie">
+      <td>Ken</td>
+      <td>Windows</td>
+      <td>IE</td>
+    </tr>
+    <tr class="linux firefox">
+      <td>Lilly</td>
+      <td>Linux</td>
+      <td>Firefox</td>
+    </tr>
+  </tbody>
+</table>
+<script src="js/jquery-3.3.1.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+
+
+<script>
+    function slugify(Text) {
+  return Text.toLowerCase().replace(/[^\w ]+/g, '').replace(/ +/g, '-');
+}
+
+$(function() {
+  $(document).ready(function() {
+    $('#pie-platforms').highcharts({
+        chart: {
+          type: 'pie'
+        },
+        title: {
+          text: 'Platforms'
+        },
+        plotOptions: {
+          pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+              enabled: false
+            },
+            showInLegend: true
+          }
+        },
+        series: [{
+          name: 'Brands',
+          point: {
+            events: {
+              click: function(event) {
+              var background = $(event.target).attr('fill');
+              console.log(slugify(this.name));
+               // $("#users tbody tr:not(." + slugify(this.name) + ")").removeClass('active');
+                $("#users tbody tr:not(." + slugify(this.name) + ")").css({'background-color': ''})
+               // $("#users tbody tr." + slugify(this.name)).toggleClass('active');
+                 $("#users tbody tr." + slugify(this.name)).css({'background-color': background})
+              }
+            }
+          },
+          colorByPoint: true,
+          data: [{
+            name: 'Windows',
+            y: 70
+          }, {
+            name: 'Mac',
+            y: 20,
+          }, {
+            name: 'Linux',
+            y: 10
+          }]
+        }]
+      }),
+      $('#pie-browsers').highcharts({
+        chart: {
+          type: 'pie'
+        },
+        title: {
+          text: 'Browsers'
+        },
+        plotOptions: {
+          pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+              enabled: false
+            },
+            showInLegend: true
+          }
+        },
+        series: [{
+          name: 'Brands',
+          point: {
+            events: {
+               click: function(event) {
+              var background = $(event.target).attr('fill');
+              console.log(slugify(this.name));
+               // $("#users tbody tr:not(." + slugify(this.name) + ")").removeClass('active');
+                $("#users tbody tr:not(." + slugify(this.name) + ")").css({'background-color': ''})
+               // $("#users tbody tr." + slugify(this.name)).toggleClass('active');
+                 $("#users tbody tr." + slugify(this.name)).css({'background-color': background})
+              }
+            }
+          },
+          colorByPoint: true,
+          data: [{
+            name: 'IE',
+            y: 60
+          }, {
+            name: 'Chrome',
+            y: 25,
+          }, {
+            name: 'Firefox',
+            y: 10
+          }, {
+            name: 'Safari',
+            y: 4
+          }, {
+            name: 'Opera',
+            y: 1
+          }]
+        }]
+      });
+  });
+});
+
+</script>
+
+</body>
+</html>
